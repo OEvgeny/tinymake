@@ -174,7 +174,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         shell: bash
         run: |
-          npm publish "${{ steps.pack.outputs.package_file }}"
+          npm publish "./${{ steps.pack.outputs.package_file }}"
 
       - name: Prepare git identity
         if: steps.rel.outputs.should_publish == 'true'
