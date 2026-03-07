@@ -1,0 +1,13 @@
+{
+  "name": "tinymake",
+  "version": "0.0.1",
+  "repository": "OEvgeny/tinymake",
+  "license": "MIT",
+  "description": "tiny GNU Makefile subset runner for JS runtimes",
+  "keywords": ["make", "gnumake"],
+  "type": "module",
+  "main": "tinymake.js",
+  "bin": {
+    "tinymake": "tinymake.js"
+  }
+}
