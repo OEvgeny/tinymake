@@ -1,8 +1,8 @@
 releases:
   - version: 0.0.2
-    release-name: tinymake 0.0.2
+    release-name: tiny-make 0.0.2
     description: |
-      Public tinymake NPM release of.
+      Public tinymake NPM release.
   - version: 0.0.1
     release-name: tinymake 0.0.1
     description: |
