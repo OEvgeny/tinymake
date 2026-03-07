@@ -9,5 +9,10 @@
   "main": "tinymake.js",
   "bin": {
     "tinymake": "tinymake.js"
-  }
+  },
+  "files": [
+    "tinymake.js",
+    "README.md",
+    "LICENSE"
+  ]
 }
