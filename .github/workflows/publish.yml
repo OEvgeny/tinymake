@@ -169,8 +169,7 @@ jobs:
           ls -la _release_artifacts
 
       - name: Publish package to npm
-        # if: steps.rel.outputs.should_publish == 'true'
-        if: false
+        if: steps.rel.outputs.should_publish == 'true'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         shell: bash

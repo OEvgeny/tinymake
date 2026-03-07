@@ -1,6 +1,6 @@
 {
   "name": "tinymake",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": "OEvgeny/tinymake",
   "license": "MIT",
   "description": "tiny GNU Makefile subset runner for JS runtimes",
