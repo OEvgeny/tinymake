@@ -1,0 +1,5 @@
+releases:
+  - version: 0.0.1
+    release-name: tinymake 0.0.1
+    description: |
+      Initial npm release of tinymake.js.
