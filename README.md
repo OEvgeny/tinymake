@@ -33,6 +33,8 @@ A tiny GNU Makefile subset runner for JS runtimes.
 - supported functions:
   - `$(realpath path...)`
   - `$(wildcard pattern...)`
+  - `$(notdir names...)`
+  - `$(dir names...)`
 - command prefixes:
   - `@` do not echo the command
   - `-` ignore non-zero exit code
@@ -52,7 +54,7 @@ A tiny GNU Makefile subset runner for JS runtimes.
 - conditionals like `ifeq`
 - target-specific variables
 - automatic dependency generation
-- functions other than `realpath` and `wildcard`
+- functions other than `realpath`, `wildcard`, `notdir` and `dir` (other GNU Make functions fail the run instead of expanding to an empty string)
 - `$(shell ...)`
 - timestamp-based rebuild checks
 - exact GNU Make parsing and escaping edge cases
