@@ -10,6 +10,7 @@ on:
 
 permissions:
   contents: write
+  id-token: write # npm trusted publishing (OIDC)
 
 concurrency:
   group: publish-release
@@ -29,7 +30,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24" # npm >= 11.5.1 for trusted publishing
           registry-url: "https://registry.npmjs.org"
 
       - name: Read releases.yml for next release
@@ -170,10 +171,9 @@ jobs:
 
       - name: Publish package to npm
         if: steps.rel.outputs.should_publish == 'true'
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         shell: bash
         run: |
+          npm --version
           npm publish "./${{ steps.pack.outputs.package_file }}"
 
       - name: Prepare git identity
