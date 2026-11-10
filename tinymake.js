@@ -355,6 +355,17 @@ function expandWildcardPattern(pattern, cwd) {
   return [...matches].sort();
 }
 
+// GNU Make built-in functions; only realpath, wildcard, notdir and dir are
+// implemented below.
+const GNU_MAKE_FUNCTIONS = new Set([
+  'abspath', 'addprefix', 'addsuffix', 'and', 'basename', 'call', 'dir',
+  'error', 'eval', 'file', 'filter', 'filter-out', 'findstring', 'firstword',
+  'flavor', 'foreach', 'guile', 'if', 'info', 'intcmp', 'join', 'lastword',
+  'let', 'notdir', 'or', 'origin', 'patsubst', 'realpath', 'shell', 'sort',
+  'strip', 'subst', 'suffix', 'value', 'warning', 'wildcard', 'word',
+  'wordlist', 'words',
+]);
+
 function createResolver(variableDefs, cliVars, options) {
   const simpleCache = new Map();
   const cwd = options.cwd;
@@ -382,6 +393,21 @@ function createResolver(variableDefs, cliVars, options) {
       return out.join(' ');
     }
 
+    if (name === 'notdir') {
+      return words
+        .map((word) => word.slice(word.lastIndexOf('/') + 1))
+        .join(' ');
+    }
+
+    if (name === 'dir') {
+      return words
+        .map((word) => {
+          const slash = word.lastIndexOf('/');
+          return slash === -1 ? './' : word.slice(0, slash + 1);
+        })
+        .join(' ');
+    }
+
     return null;
   }
 
@@ -392,6 +418,10 @@ function createResolver(variableDefs, cliVars, options) {
       const [, fnName, argText] = fnMatch;
       const evaluated = evaluateFunction(fnName, argText, local, stack);
       if (evaluated != null) return evaluated;
+      // GNU Make would run these; expanding them as an undefined variable
+      // would silently produce an empty string.
+      if (GNU_MAKE_FUNCTIONS.has(fnName))
+        fail(`unsupported function: $(${fnName} ...)`);
     }
     return resolveVariable(trimmed, local, stack);
   }
