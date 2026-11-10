@@ -1,4 +1,8 @@
 releases:
+  - version: 0.0.3
+    release-name: tiny-make 0.0.3
+    description: |
+      Adds `$(notdir ...)` and `$(dir ...)`. Other GNU Make functions now fail the run instead of silently expanding to an empty string.
   - version: 0.0.2
     release-name: tiny-make 0.0.2
     description: |
